@@ -11,11 +11,11 @@ var App = function(){
 
   // Setup
   self.dbServer = new mongodb.Server(process.env.OPENSHIFT_MONGODB_DB_HOST,parseInt(process.env.OPENSHIFT_MONGODB_DB_PORT));
-  self.db = new mongodb.Db('nodews', self.dbServer, {auto_reconnect: true});
+  self.db = new mongodb.Db(process.env.OPENSHIFT_APP_NAME, self.dbServer, {auto_reconnect: true});
   self.dbUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
   self.dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
 
-  self.ipaddr  = process.env.OPENSHIFT_INTERNAL_IP;
+  self.ipaddr  = process.env.OPENSHIFT_INTERNAL_IP || '127.0.0.1';
   self.port    = parseInt(process.env.OPENSHIFT_INTERNAL_PORT) || 8080;
   if (typeof self.ipaddr === "undefined") {
     console.warn('No OPENSHIFT_INTERNAL_IP environment variable');
