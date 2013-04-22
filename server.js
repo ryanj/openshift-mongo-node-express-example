@@ -16,10 +16,10 @@ var App = function(){
   self.dbUser = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
   self.dbPass = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
 
-  self.ipaddr  = process.env.OPENSHIFT_INTERNAL_IP;
+  self.ipaddr  = process.env.OPENSHIFT_INTERNAL_IP || '127.0.0.1';
   self.port    = parseInt(process.env.OPENSHIFT_INTERNAL_PORT) || 8080;
   if (typeof self.ipaddr === "undefined") {
-    console.warn('No OPENSHIFT_INTERNAL_IP environment variable');
+    console.warn('No OPENSHIFT_INTERNAL_IP environment variable, switching to local development mode...');
   };
 
 
